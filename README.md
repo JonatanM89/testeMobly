@@ -1,7 +1,7 @@
 # testeMobly
 Teste admissional para desenvolvedor PHP na Mobly
 
-# Install & run
+# Install & run (Windows)
  
  - cd testeMobly
 
