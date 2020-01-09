@@ -2,6 +2,12 @@
 
 @section('content')
     <h1>Usuários</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="./">Posts</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Usuários</li>
+        </ol>
+      </nav>
     <input name="_token" id="token" type="hidden" value="{{ csrf_token() }}"/>
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -279,9 +285,8 @@ function carregarUsuarios(){
                 div    += '     <td>'+data[i].name+'</td>';
                 div    += '     <td>'+data[i].email+'</td>';
                 div    += '     <td>';
-                div    += '         <button onclick="editarAddUser('+data[i].id+')" class="btn btn-sm btn-primary">Editar</button>';
-                div    += '         <button onclick="apagar_usuario('+data[i].id+')" class="btn btn-sm btn-danger">Excluir</button>';
-                div    += '         <a class="btn btn-sm btn-success">Posts</button>';
+                div    += '         <button style="margin-top:5px" onclick="editarAddUser('+data[i].id+')" class="btn btn-sm btn-primary">Editar</button>';
+                div    += '         <button style="margin-top:5px" onclick="apagar_usuario('+data[i].id+')" class="btn btn-sm btn-danger">Excluir</button>';
                 div    += '     </td>';
                 div    += ' </tr>';
             }

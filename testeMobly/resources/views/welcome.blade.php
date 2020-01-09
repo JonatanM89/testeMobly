@@ -1,7 +1,19 @@
 @extends('master')
 
 @section('content')
-    <h1>Posts</h1>
+    <h1 style="text-align:center">Posts</h1>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <label>Posts de </label>
+            <select id="select_user" class="form-group">
+                <option selected>Todos</option>
+                @foreach($users as $user)
+                <option value="<?=$user->apiId != '' ? $user->apiId : -1?>"><?=$user->name?></option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 
     <div class="row" id="feed_posts">
 
@@ -14,12 +26,12 @@
 
 window.onload=function()
 {
-  loadFeeds()
+  loadFeeds(0)
 }
 
-function loadFeeds(){
+function loadFeeds(id){
     $.ajax({
-        url : "/posts/getall",
+        url : "/users/"+id+"/posts",
         cache:false,
         type: 'get',
         headers: {
@@ -48,6 +60,9 @@ function loadFeeds(){
 
             }
 
+            if(data.length == 0){
+                div += '<p style="text-align:center"><b>Nada para mostrar</b></p>'
+            }
 
 
 
@@ -59,6 +74,17 @@ function loadFeeds(){
             //$("#alert_erro").show()
             //alert("Ocorreu um erro: "+err);
         }
+    });
+
+
+
+    $('#select_user').on('change', function (e) {
+
+        var optionSelected = $("option:selected", this);
+        var valueSelected = this.value;
+        loadFeeds(valueSelected)
+
+
     });
 }
 

@@ -8,9 +8,15 @@ use App\User;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $users   = User::all();
+        return view('welcome',array('users' => $users));
+    }
 
-    public function getAll(){
-        $posts   = Post::all();
+
+    public function getAll($id){
+        $posts   = $id == 0 ? Post::all() : Post::where('userId', '=', $id)->get();
 
         $feedposts = Array();
 
@@ -48,5 +54,9 @@ class PostController extends Controller
         }
 
         return Response()->json("ok",201);
+    }
+
+    public function getByUser($id){
+        return $this->getAll($id);
     }
 }
